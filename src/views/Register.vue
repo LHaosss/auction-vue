@@ -1,22 +1,43 @@
-<script>
-    export default {
-        data() {
-            return {
-                username:"",
-                password: ""
-            }
-        },
-        methods: {
-            Register() {
-                if (this.username === "") {
-                    alert("用户名不能为空")
-                }
-                if (this.password === "") {
-                    alert("用户名不能为空")
-                }
-            }
+<script setup>
+    import { inject, ref, onMounted } from 'vue';
+    import router from '../router'
+    import { useMainStore } from '../stores';
+
+    const axios = inject('$myHttp')
+    const store = useMainStore()
+
+    const username = ref("")
+    const password = ref("")
+ 
+    function Register() {
+        if (username === "") {
+            alert("用户名不能为空")
         }
+        if (password === "") {
+            alert("用户名不能为空")
+        }
+
+        axios.post(
+             'http://127.0.0.1:8881/userapi/v1/user/register',
+             {
+                username: username.value,
+                password: password.value
+             }
+        )
+        .then(response => {
+            alert(response.data.description)
+            router.push('/login')
+        })
+        .catch(err => {
+            console.log(err)
+            alert(err)
+        })
     }
+
+    onMounted(() => {
+        store.display = "display: none"
+    })
+
 </script>
 
 <template>
@@ -41,8 +62,9 @@
 .login-wrap {
     width: 60vw;
     height: 30vh;
-
     margin: 20vw;
+    margin-top: 26vh;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     /* align-items: center; */

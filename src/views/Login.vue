@@ -1,67 +1,57 @@
-<script>
-    import { useStore } from '../stores/counter'
-    import { computed } from 'vue'
-    import router from '../router';
+<script setup>
+import { useMainStore } from '../stores'
+import router from '../router';
+import { inject, ref, onMounted } from 'vue';
 
+    const un = ref("")
+    const pwd = ref("")
 
-     export default {
-        data() {
-            return {
-                un:"",
-                pwd: ""
+    const store = useMainStore()
+    const axios = inject('$myHttp')
+
+    function  LoginIn() {
+        if (un === "") {
+            alert("用户名不能为空")
+            return
             }
-        },
-        methods: {
-            LoginIn() {
-                if (this.un === "") {
-                    alert("用户名不能为空")
-                    return
-                }
-                if (this.pwd === "") {
-                    alert("用户名不能为空")
-                    return
-                }
-                this.username = this.un
-                this.userXid = "temp"
-                alert("here")
-                router.push('/')
-                return
-            }
-        },
-        setup() {
-            const store = useStore()
-
-            const username = computed({
-                get: () => store.username,
-                set(newVal) {
-                    store.message = newVal
-                }
-            })
-
-            const userXid = computed({
-                get: () => store.userXid,
-                set(newVal) {
-                    store.userXid = newVal
-                }
-            })
-
-            const display = computed({
-                get: () => store.display,
-                set(newVal) {
-                    store.display = newVal
-                }
-            })
-           
-            return {
-                store, username, userXid, display
-            }
+        if (pwd === "") {
+            alert("用户名不能为空")
+            return
         }
 
+        // 使用axois请求后端服务，获取数据
+        axios.post(
+            'http://127.0.0.1:8881/userapi/v1/user/login',
+            {
+                username: un.value,
+                password: pwd.value
+            }
+        )
+        .then(response => {
+            store.username = response.data.user_name
+            store.userXid = response.data.xid
+            store.display = "display: block"
+            router.push('/')
+        })
+        .catch(err => {
+            alert(err.response.data)
+        })
+
+        // headerImg = document.getElementsByClassName('header-img')
+      
+        return
     }
+
+    onMounted(() => {
+        store.display = "display: none"
+
+        if (store.username !== "" && store.userXid !== "") {
+            router.push('/auction')
+        }
+    })
 </script>
 
 <template>
-   
     <div>
         <div  class="login-wrap">
             <div class="d">
@@ -82,8 +72,9 @@
 .login-wrap {
     width: 60vw;
     height: 30vh;
-
     margin: 20vw;
+    margin-top: 26vh;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     /* align-items: center; */
