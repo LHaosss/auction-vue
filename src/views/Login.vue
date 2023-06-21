@@ -21,7 +21,7 @@ import { inject, ref, onMounted } from 'vue';
 
         // 使用axois请求后端服务，获取数据
         axios.post(
-            'http://127.0.0.1:8881/userapi/v1/user/login',
+            'http://192.168.1.9:8881/userapi/v1/user/login',
             {
                 username: un.value,
                 password: pwd.value

@@ -18,7 +18,7 @@
         }
 
         axios.post(
-             'http://127.0.0.1:8881/userapi/v1/user/register',
+             'http://192.168.1.9:8881/userapi/v1/user/register',
              {
                 username: username.value,
                 password: password.value
