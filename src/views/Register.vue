@@ -10,6 +10,7 @@
     const password = ref("")
  
     function Register() {
+        alert("1")
         if (username === "") {
             alert("用户名不能为空")
         }
@@ -18,20 +19,23 @@
         }
 
         axios.post(
-             'http://192.168.1.9:8881/userapi/v1/user/register',
+            import.meta.env.VITE_REQUEST_IP+':8881/userapi/v1/user/register',
              {
                 username: username.value,
                 password: password.value
              }
         )
         .then(response => {
+            alert("2")
             alert(response.data.description)
             router.push('/login')
         })
         .catch(err => {
+            alert("3")
             console.log(err)
             alert(err)
         })
+        alert(4)
     }
 
     onMounted(() => {

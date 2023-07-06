@@ -37,7 +37,7 @@
             headers: {'Content-Type': 'multipart/form-data'}
         }
         
-        axios.post('http://192.168.1.9:7771/img/v1/img/upload', param, config)
+        axios.post(import.meta.env.VITE_REQUEST_IP+':7772/img/v1/img/upload', param, config)
             .then(response => {
                 fileUrl.value = response?.data?.img_url
             })
@@ -56,7 +56,7 @@
         if (name.value !== "" && userXid.value !== "" && price.value > 0 && type.value !== "" && fileUrl.value !== "") {
               // 发送提交竞品请求
                 axios.post(
-                    'http://192.168.1.9:8882/auction/v1/auction/post',
+                    import.meta.env.VITE_REQUEST_IP+':8882/auction/v1/auction/post',
                     {
                         auction_name: name.value,
                         post_user_xid: userXid.value,

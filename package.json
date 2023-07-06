@@ -3,12 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode development",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "html": "node HandleHTML.js"
   },
   "dependencies": {
     "@vitejs/plugin-legacy": "^4.0.5",
+    "aliyun-rts-sdk": "^2.2.4",
+    "fs": "^0.0.1-security",
     "pinia": "^2.0.36",
     "terser": "^5.18.1",
     "vue": "^3.3.2",
