@@ -9,7 +9,7 @@ const store = useMainStore()
 const auctionsInfo = ref(null)
 
 onMounted(() => {
-    axios.get(import.meta.env.VITE_REQUEST_IP+':8882/auction/v1/auction/auctions/time')
+    axios.get('http://172.21.240.137'+':8882/auction/v1/auction/auctions/time')
     .then(response => {
         auctionsInfo.value = response?.data?.auctions_info
     })
@@ -26,7 +26,7 @@ function offerPrice(current_price, auction_xid) {
     if (offer.value > current_price) {
         // 提交出价
         axios.post(
-            import.meta.env.VITE_REQUEST_IP+':8882/auction/v1/auction/offer', 
+            'http://172.21.240.137'+':8882/auction/v1/auction/offer', 
             {
                 "auction_xid": auction_xid,
                 "offer_user_xid": store.userXid,

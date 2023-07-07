@@ -9,7 +9,7 @@ const aliRts = AliRTS.createClient();
 
 if (props.streamUrl === "") {
   console.log("播放流不能为空");
-  // router.push("/");
+  router.push("/");
 }
 
 aliRts.subscribe(props.streamUrl).then((remoteStream) => {
@@ -24,5 +24,5 @@ aliRts.subscribe(props.streamUrl).then((remoteStream) => {
 </script>
 
 <template>
-  <div id="temp">{{ streamUrl }}</div>
+  <div id="temp"></div>
 </template>

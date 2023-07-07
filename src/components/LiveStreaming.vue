@@ -11,7 +11,7 @@ const lives = ref([]);
 // const axios = inject("$myHttp");
 
 // axios
-//   .post(import.meta.env.VITE_REQUEST_IP + ":7773/live/v1/live/get", {
+//   .post('http://172.21.240.137' + ":7773/live/v1/live/get", {
 //     tag: "temp",
 //   })
 //   .then((response) => {

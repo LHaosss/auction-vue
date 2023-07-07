@@ -21,7 +21,7 @@ function LoginIn() {
 
   // 使用axois请求后端服务，获取数据
   axios
-    .post(import.meta.env.VITE_REQUEST_IP+":8881/userapi/v1/user/login", {
+    .post('http://172.21.240.137'+":8881/userapi/v1/user/login", {
       username: un.value,
       password: pwd.value,
     })

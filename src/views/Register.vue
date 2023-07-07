@@ -19,7 +19,7 @@
         }
 
         axios.post(
-            import.meta.env.VITE_REQUEST_IP+':8881/userapi/v1/user/register',
+            'http://172.21.240.137'+':8881/userapi/v1/user/register',
              {
                 username: username.value,
                 password: password.value
